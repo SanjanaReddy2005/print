@@ -8,6 +8,7 @@ from .utils.gcode_generator import generate_gcode
 
 def main(actual_file_name,token):
     # TODO: UNCOMMENT BELOW LINE
+    print(actual_file_name)
     splitter.preprocess()
     path = os.getcwd()
     parent_path = os.path.abspath(os.path.join(path, os.pardir))

@@ -117,7 +117,7 @@ def generate_gcode(file_path,file_name,actual_file_name,token):
     parent_path = os.path.abspath(os.path.join(path, os.pardir))
     curent_dir,ext = os.path.splitext(actual_file_name.lower())
     gcode_files_directory = os.path.join(parent_path,'software','gcode','gcode_files',curent_dir)
-
+    
     print(gcode_files_directory)
     if not (os.path.exists(gcode_files_directory)):
         os.mkdir(gcode_files_directory)

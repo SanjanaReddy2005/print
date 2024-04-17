@@ -13,6 +13,7 @@ def preprocess():
   disconnected = mesh
   try:
     disconnected = mesh.split(only_watertight=False)
+    print("disconnected",len(disconnected))
   except:
     disconnected = [mesh]
 

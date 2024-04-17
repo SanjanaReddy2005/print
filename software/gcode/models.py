@@ -27,3 +27,7 @@ class upload_stlfile(models.Model):
 class gcode_files(models.Model):
     user = models.ForeignKey("Token_access",on_delete=models.CASCADE)
     file_path = models.FilePathField()
+
+class download_Files(models.Model):
+    file_name = models.TextField(max_length=1000)
+    directory = models.FilePathField()

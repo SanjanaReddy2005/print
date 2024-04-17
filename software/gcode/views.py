@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework.decorators import APIView,authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication,TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +11,9 @@ from rest_framework import status
 from .models import Token_access
 from rest_framework.parsers import MultiPartParser,FormParser
 from django.shortcuts import get_object_or_404
+from django.core.files import File
 from .main import main
+import os
 # Create your views here.
 class login(APIView):
     def post(self, request ):
@@ -55,6 +58,33 @@ class stl_file(APIView):
             main(request.data['file_name'],request.data['token'])
             return Response(serialzer.data,status=status.HTTP_200_OK)
         return Response(serialzer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+class gcode_file(APIView):
+    def get(self,request):
+        print("request.data ",request.data)
+        print(request.query_params.get('file_name'))
+        file_name = request.query_params.get('file_name')
+        path = os.path.join('gcode','gcode_files',file_name)
+        print(path)
+        list_dir = os.listdir(path)
+        last_response = {}
+        for i,p in enumerate(list_dir):
+            p = os.path.join(path,p)
+            f = open(p,'r')
+            file = File(f)
+
+            a = file.read()
+            last_response[i] = a
+            os.remove(p)
+        
+        # print(os.listdir(path))
+        # os.remove(os.listdir(path))
+        return Response(last_response,status=status.HTTP_200_OK)
+
+            
+
+        
+
 
 # from django.core.files.storage import default_storage
 
