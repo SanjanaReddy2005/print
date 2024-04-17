@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# import os
+# from dotenv import load_dotenv
+# env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+# load_dotenv(env_path)
 
 # Application definition
 
